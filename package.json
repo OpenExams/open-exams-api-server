@@ -23,6 +23,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
-    "mongoose": "^5.1.4"
+    "mongoose": "^5.1.4",
+    "session-storage": "^1.0.1"
   }
 }

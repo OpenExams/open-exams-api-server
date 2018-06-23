@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 
 // Subject Schema
@@ -28,13 +27,19 @@ module.exports.addSubject = function(newSubject, callback) {
 }
 
 module.exports.incrimentSubjectStudentNumber = function(subjects, callback) {
-  let year = new Date().getFullYear();
+  const year = new Date().getFullYear();
   Subject.updateMany(subjects, { $inc: { students: 1 } }, {new: true }, callback)
+}
+
+module.exports.incrimentSubjectRepeatStudentNumber = function(subjects, callback) {
+  const year = new Date().getFullYear();
+  Subject.updateMany(subjects, { $inc: { repeat_students: 1 } }, {new: true }, callback)
 }
 
 module.exports.decrimentSubjectStudentNumber = function(subjects, callback) {
   Subject.updateMany(subjects, { $inc: { students: -1 } }, {new: true }, callback)
 }
 
-
-
+module.exports.decrimentSubjectRepeatStudentNumber = function(subjects, callback) {
+  Subject.updateMany(subjects, { $inc: { repeat_students: -1 } }, {new: true }, callback)
+}

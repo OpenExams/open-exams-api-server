@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 
 // Student Schema
@@ -62,3 +61,6 @@ module.exports.updateStudent = function(newStudent, callback) {
   Student.updateOne(newStudent, callback);
 }
 
+module.exports.getCount = function(id, callback) {
+  Student.count({_id:id}, callback);
+}

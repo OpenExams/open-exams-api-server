@@ -8,7 +8,10 @@ const app = express();
 
 const port = process.env.PORT || 9080;
 const students = require('./routes/students');
+const member = require('./routes/members');
 const subjects = require('./routes/subjects');
+const exams = require('./routes/exams');
+const login = require('./routes/login');
 
 log.info('test info');
 log.warn('test warn');
@@ -29,8 +32,11 @@ mongoose.connection.on('error', (err) => {
 app.use(bodyParser.json());
 app.use(cors())
 
+app.use('/login', login);
 app.use('/students', students);
 app.use('/subjects', subjects);
+app.use('/exams', exams);
+app.use('/members', member);
 
 // Start Server
 app.listen(port, () => {

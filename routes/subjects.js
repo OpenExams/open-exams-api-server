@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
 const Subject = require('../models/subject');
+const authMiddleware = require('../middleware/auth-middleware')
+
+router.use(authMiddleware)
 
 // Add
 router.post('/', (req, res, next) => {
-  let newSubject = new Subject ({
+  const newSubject = new Subject ({
     name: req.body.name,
     _id: req.body.code,
     year: req.body.year,
@@ -25,11 +26,11 @@ router.post('/', (req, res, next) => {
 
 
 router.get('/:grad/:stream/:year/:semester', (req, res, next) =>{
-  let undergrad = true
+  const undergrad = true
   if(req.params['grad'] == "graduate"){
     undergrad = false
   }
-  let subject = { 
+  const subject = { 
     undergraduate: undergrad, 
     stream: req.params['stream'], 
     year: req.params['year'], 
